@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_line/core/theme/theme.dart';
 import 'package:story_line/features/auth/presentation/pages/signup_page.dart';
 
 void main() {
@@ -14,10 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Story Line',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.darkThemeMode,
       home: const SignUpPage(),
     );
   }

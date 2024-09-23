@@ -10,15 +10,22 @@ class AuthRespositoryImplementation implements AuthRespository {
   const AuthRespositoryImplementation(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, User>> loginWithEmailPassword({required String email, required String password}) {
-    throw UnimplementedError();
+  Future<Either<Failure, User>> loginWithEmailPassword({required String email, required String password}) 
+  async {
+    return _getUser(()  async => await remoteDataSource.loginWithEmailPassword(email: email, password: password),);
   }
 
   @override
   Future<Either<Failure, User>> signUpWithEmailPassword({required String name, required String email, required String password}) 
   async {
+    return _getUser(() async => await remoteDataSource.signUpWithEmailPassword(name: name, email: email, password: password));
+  }
+  
+  Future<Either<Failure, User>> _getUser(
+    Future<User> Function() fn,
+  ) async {
     try {
-      final user = await remoteDataSource.signUpWithEmailPassword(name: name, email: email, password: password,);
+      final user = await fn();
 
       return right(user);
     }
@@ -27,6 +34,5 @@ class AuthRespositoryImplementation implements AuthRespository {
       return left(Failure(e.message));
     }
   }
-  
 
 }

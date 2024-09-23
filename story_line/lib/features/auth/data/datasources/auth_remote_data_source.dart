@@ -19,7 +19,6 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
   AuthRemoteDataSourceImplementation(this.supabaseClient);
   @override
   Future<String> loginWithEmailPassword({required String email, required String password}) {
-    // TODO: implement loginWithEmailPassword
     throw UnimplementedError();
   }
 
@@ -27,7 +26,7 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
   Future<String> signUpWithEmailPassword({required String name, required String email, required String password}) 
   async{
     try {
-      final response = await supabaseClient.auth.signUp(password: password, email: email, data: {'name': name,}
+      final response = await supabaseClient.auth.signUp(password: password, email: email, data: {'name': name,},
       );
 
       if(response.user == null)

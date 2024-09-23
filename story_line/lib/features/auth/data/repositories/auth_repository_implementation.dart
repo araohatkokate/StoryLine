@@ -10,7 +10,6 @@ class AuthRespositoryImplementation implements AuthRespository {
 
   @override
   Future<Either<Failure, String>> loginWithEmailPassword({required String email, required String password}) {
-    // TODO: implement loginWithEmailPassword
     throw UnimplementedError();
   }
 

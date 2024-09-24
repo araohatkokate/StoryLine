@@ -3,6 +3,7 @@ import 'package:story_line/core/secrets/app_secrets.dart';
 import 'package:story_line/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:story_line/features/auth/data/repositories/auth_repository_implementation.dart';
 import 'package:story_line/features/auth/domain/respository/auth_respository.dart';
+import 'package:story_line/features/auth/domain/usecases/user_login.dart';
 import 'package:story_line/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:story_line/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -19,5 +20,6 @@ void _initAuth() {
   serviceLocator.registerFactory<AuthRemoteDataSource>(() => AuthRemoteDataSourceImplementation(serviceLocator()));
   serviceLocator.registerFactory<AuthRespository>(() => AuthRespositoryImplementation(serviceLocator()));
   serviceLocator.registerFactory(() => UserSignUp(serviceLocator()));
-  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(),));
+  serviceLocator.registerFactory(() => UserLogin(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(), userLogin: serviceLocator()));
 }

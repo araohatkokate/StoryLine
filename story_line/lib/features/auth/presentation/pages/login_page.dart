@@ -47,8 +47,8 @@ class _LoginPageState extends State<LoginPage> {
                 return const Loader();
               }
           return Form(
+            key: formKey,
             child: Column(
-              key: formKey,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
@@ -77,10 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                         context.read<AuthBloc>().add(
                               AuthLogin(
                                   email: emailController.text.trim(),
-                                  password: passwordController.text.trim()),
+                                  password: passwordController.text.trim()
+                                  ),
                             );
                       }
-                    }),
+                    },
+                  ),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {

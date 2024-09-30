@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:story_line/core/error/exceptions.dart';
 import 'package:story_line/core/error/failures.dart';
 import 'package:story_line/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:story_line/features/auth/domain/entities/user.dart';
+import 'package:story_line/core/common/entities/user.dart';
 import 'package:story_line/features/auth/domain/respository/auth_respository.dart';
 
 class AuthRespositoryImplementation implements AuthRespository {

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:story_line/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:story_line/core/secrets/app_secrets.dart';
 import 'package:story_line/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:story_line/features/auth/data/repositories/auth_repository_implementation.dart';
@@ -15,6 +16,8 @@ Future<void> initDependencies () async {
   _initAuth();
   final supabase = await Supabase.initialize(url: AppSecrets.supabaseurl, anonKey: AppSecrets.supabaseanonkey);
   serviceLocator.registerLazySingleton(() => supabase.client);
+
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -23,5 +26,5 @@ void _initAuth() {
   serviceLocator.registerFactory(() => UserSignUp(serviceLocator()));
   serviceLocator.registerFactory(() => UserLogin(serviceLocator()));
   serviceLocator.registerFactory(() => CurrentUser(serviceLocator())); 
-  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(), userLogin: serviceLocator(), currentUser: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(), userLogin: serviceLocator(), currentUser: serviceLocator(), appUserCubit: serviceLocator(),));
 }

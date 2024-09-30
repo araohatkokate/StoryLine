@@ -1,4 +1,4 @@
-import 'package:story_line/features/auth/domain/entities/user.dart';
+import 'package:story_line/core/common/entities/user.dart';
 
 class UserModel extends User {
   UserModel({required super.id, required super.email, required super.name});

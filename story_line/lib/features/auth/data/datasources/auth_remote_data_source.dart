@@ -37,7 +37,9 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
       {
           throw const ServerException('User is null!');
       }
-      return UserModel.fromJson(response.user!.toJson());
+      return UserModel.fromJson(response.user!.toJson()).copyWith(
+        email: currentUserSession!.user.email,
+      );
     }
 
     catch (e) {
@@ -56,7 +58,9 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
       {
           throw const ServerException('User is null!');
       }
-      return UserModel.fromJson(response.user!.toJson());
+      return UserModel.fromJson(response.user!.toJson()).copyWith(
+        email: currentUserSession!.user.email,
+      );
     }
 
     catch (e) {
@@ -70,7 +74,9 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
     try {
       if(currentUserSession != null) {
       final userData = await supabaseClient.from('profiles').select().eq('id', currentUserSession!.user.id,);
-      return UserModel.fromJson(userData.first);
+      return UserModel.fromJson(userData.first).copyWith(
+        email: currentUserSession!.user.email,
+      );
       }
 
       return null;

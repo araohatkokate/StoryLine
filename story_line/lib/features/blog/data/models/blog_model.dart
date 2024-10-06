@@ -1,7 +1,7 @@
 import 'package:story_line/features/blog/domain/enitities/blog.dart';
 
 class BlogModel extends Blog {
-  BlogModel({required super.id, required super.posterId, required super.title, required super.content, required super.imageUrl, required super.topics, required super.updatedAt});
+  BlogModel({required super.id, required super.posterId, required super.title, required super.content, required super.imageUrl, required super.topics, required super.updatedAt, super.posterName});
 
   Map<String, dynamic> toJson() {
     return <String, dynamic> {
@@ -27,7 +27,7 @@ class BlogModel extends Blog {
     );
   }
 
-  BlogModel copywith({
+  BlogModel copyWith({
     String? id,
     String? posterId,
     String? title,
@@ -35,6 +35,7 @@ class BlogModel extends Blog {
     String? imageUrl,
     List<String>? topics,
     DateTime? updatedAt,
+    String? posterName,
   }) {
     return BlogModel(
       id: id ?? this.id, 
@@ -43,6 +44,7 @@ class BlogModel extends Blog {
       content: content ?? this.content, 
       imageUrl: imageUrl ?? this.imageUrl, 
       topics: topics ?? this.topics, 
-      updatedAt: updatedAt ?? this.updatedAt);
+      updatedAt: updatedAt ?? this.updatedAt,
+      posterName: posterName ?? this.posterName);
   }
 }

@@ -32,7 +32,7 @@ class BlogRespositoryImplementation implements BlogRepository{
 
         final imageUrl = await blogRemoteDataSource.uploadBlogImage(image: image, blog: blogModel);
 
-        blogModel = blogModel.copywith(
+        blogModel = blogModel.copyWith(
           imageUrl: imageUrl,
         );
 
@@ -44,6 +44,18 @@ class BlogRespositoryImplementation implements BlogRepository{
         return left(Failure(e.toString()));
       }
 
+  }
+  
+  @override
+  Future<Either<Failure, List<Blog>>> getAllBlogs() async {
+    try {
+      final blogs = await blogRemoteDataSource.getAllBlogs();
+      return right(blogs);
+    }
+
+    on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
   }
   
 }

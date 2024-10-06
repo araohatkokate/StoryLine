@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:story_line/core/theme/app_pallete.dart';
+import 'package:story_line/core/utils/calculate_reading_time.dart';
+import 'package:story_line/features/blog/domain/enitities/blog.dart';
+
+class BlogViewerPage extends StatelessWidget {
+  static route(Blog blog) => MaterialPageRoute(builder: (context) => BlogViewerPage(blog: blog,),);
+  final Blog blog; 
+  const BlogViewerPage({super.key, required this.blog});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(blog.title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20,),
+            Text('By ${blog.posterName}', style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
+            const SizedBox(height: 5,),
+            Text('${blog.updatedAt} . ${calculateReadingTime(blog.content)} min', style: const TextStyle(fontWeight: FontWeight.w500, color:  AppPallete.greyColor, fontSize: 16),)
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -5,9 +5,9 @@ import 'package:story_line/core/usecase/usecase.dart';
 import 'package:story_line/features/blog/domain/enitities/blog.dart';
 import 'package:story_line/features/blog/domain/repositories/blog_respository.dart';
 
-class Uploadblog implements UseCase<Blog, UploadBlogParams> {
+class UploadBlog implements UseCase<Blog, UploadBlogParams> {
   final BlogRepository blogRepository;
-  Uploadblog(this.blogRepository);
+  UploadBlog(this.blogRepository);
 
   @override
   Future<Either<Failure, Blog>> call(UploadBlogParams params) async {

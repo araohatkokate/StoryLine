@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_line/core/common/widgets/loader.dart';
+import 'package:story_line/core/theme/app_pallete.dart';
 import 'package:story_line/core/utils/show_snackbar.dart';
 import 'package:story_line/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:story_line/features/blog/presentation/pages/add_new_blog_page.dart';
+import 'package:story_line/features/blog/presentation/widgets/blog_card.dart';
 
 class BlogPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const BlogPage());
@@ -48,7 +50,7 @@ class _BlogPageState extends State<BlogPage> {
               itemCount: state.blogs.length,
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
-                return Text(blog.title);
+                return BlogCard(blog: blog, color: AppPallete.gradient1,);
               },
             );
           } 

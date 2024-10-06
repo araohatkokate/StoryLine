@@ -26,4 +26,23 @@ class BlogModel extends Blog {
       updatedAt: map['updated_at'] == null ? DateTime.now() : DateTime.parse(map['updated_at']),
     );
   }
+
+  BlogModel copywith({
+    String? id,
+    String? posterId,
+    String? title,
+    String? content,
+    String? imageUrl,
+    List<String>? topics,
+    DateTime? updatedAt,
+  }) {
+    return BlogModel(
+      id: id ?? this.id, 
+      posterId: posterId ?? this.posterId, 
+      title: title ?? this.title, 
+      content: content ?? this.content, 
+      imageUrl: imageUrl ?? this.imageUrl, 
+      topics: topics ?? this.topics, 
+      updatedAt: updatedAt ?? this.updatedAt);
+  }
 }

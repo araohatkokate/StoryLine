@@ -1,4 +1,4 @@
-# story_line
+# Story Line
 
 A new Flutter project.
 

@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:story_line/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:story_line/core/network/connection_checker.dart';
 import 'package:story_line/core/secrets/app_secrets.dart';
 import 'package:story_line/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:story_line/features/auth/data/repositories/auth_repository_implementation.dart';
@@ -24,12 +26,16 @@ Future<void> initDependencies () async {
   final supabase = await Supabase.initialize(url: AppSecrets.supabaseurl, anonKey: AppSecrets.supabaseanonkey);
   serviceLocator.registerLazySingleton(() => supabase.client);
 
+  serviceLocator.registerFactory(() => InternetConnection());
+
   serviceLocator.registerLazySingleton(() => AppUserCubit());
+
+  serviceLocator.registerFactory<ConnectionChecker>(() => ConnectionCheckerImplementation(serviceLocator()));
 }
 
 void _initAuth() {
   serviceLocator.registerFactory<AuthRemoteDataSource>(() => AuthRemoteDataSourceImplementation(serviceLocator()));
-  serviceLocator.registerFactory<AuthRespository>(() => AuthRespositoryImplementation(serviceLocator()));
+  serviceLocator.registerFactory<AuthRespository>(() => AuthRespositoryImplementation(serviceLocator(), serviceLocator()));
   serviceLocator.registerFactory(() => UserSignUp(serviceLocator()));
   serviceLocator.registerFactory(() => UserLogin(serviceLocator()));
   serviceLocator.registerFactory(() => CurrentUser(serviceLocator())); 
